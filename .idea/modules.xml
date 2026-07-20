@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Java-Nelio.iml" filepath="$PROJECT_DIR$/Java-Nelio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/comportamento-de-memoria-arrays-listas/comportamento-de-memoria-arrays-listas.iml" filepath="$PROJECT_DIR$/comportamento-de-memoria-arrays-listas/comportamento-de-memoria-arrays-listas.iml" />
       <module fileurl="file://$PROJECT_DIR$/exercicio-consolidacao/exercicio-consolidacao.iml" filepath="$PROJECT_DIR$/exercicio-consolidacao/exercicio-consolidacao.iml" />
       <module fileurl="file://$PROJECT_DIR$/funcoes-matematicas/funcoes-matematicas.iml" filepath="$PROJECT_DIR$/funcoes-matematicas/funcoes-matematicas.iml" />
       <module fileurl="file://$PROJECT_DIR$/funcoes-string/funcoes-string.iml" filepath="$PROJECT_DIR$/funcoes-string/funcoes-string.iml" />
