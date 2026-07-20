@@ -13,17 +13,13 @@ public class BankAccount {
         this.sale = sale;
     }
 
-    public BankAccount(String accountHolder, double sale){
+    public BankAccount(int accountNumber, String accountHolder){
         this.accountHolder = accountHolder;
-        this.sale = sale;
+        this.accountNumber = accountNumber;
     }
 
     public int getAccountNumber() {
         return accountNumber;
-    }
-
-    public void setAccountNumber(int accountNumber) {
-        this.accountNumber = accountNumber;
     }
 
     public String getAccountHolder() {
@@ -44,7 +40,8 @@ public class BankAccount {
 
     public void withdraw(double value){
         double tax = 5.00;
-        this.sale -= value - tax;
+        value += tax;
+        this.sale -= value;
     }
 
     public String toString(){

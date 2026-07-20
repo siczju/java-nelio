@@ -8,22 +8,29 @@ public class Main {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
 
-        BankAccount bank = new BankAccount();
-
         System.out.print("\nEnter account number: ");
-        bank.setAccountNumber(sc.nextInt());
+        int accountNumber = sc.nextInt();
         sc.nextLine();
 
         System.out.print("\nEnter account holder: ");
-        bank.setAccountHolder(sc.nextLine());
+        String accountHolder = sc.nextLine();
 
         System.out.print("\nIs there a initial deposit (y/n)? ");
         char condition = sc.next().charAt(0);
 
+        while (condition != 'y' && condition != 'n') {
+            System.out.print("Invalid option. Enter y or n: ");
+            condition = sc.next().charAt(0);
+        }
+
+        BankAccount bank;
         if(condition == 'y') {
             System.out.print("Enter a deposit value: ");
-            bank.deposit(sc.nextDouble());
-            sc.nextLine();
+            double deposit = sc.nextDouble();
+            bank = new BankAccount(accountNumber, accountHolder, deposit);
+        }
+        else{
+            bank = new BankAccount(accountNumber, accountHolder);
         }
 
         do{
@@ -37,8 +44,13 @@ public class Main {
             bank.withdraw(sc.nextDouble());
             System.out.println("Updated account data: \n" + bank + "\n");
 
-            System.out.println("Leave? (y/n)");
-            condition = sc.next().charAt(0);
+            System.out.print("Leave? (y/n) ");
+            condition = Character.toLowerCase(sc.next().charAt(0));
+
+            while (condition != 'y' && condition != 'n') {
+                System.out.print("Invalid option. Enter y or n: ");
+                condition = sc.next().charAt(0);
+            }
 
         } while (condition != 'y');
 
