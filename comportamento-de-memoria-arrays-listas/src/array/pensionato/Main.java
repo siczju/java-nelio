@@ -13,7 +13,7 @@ public class Main {
         int quantityRoom = sc.nextInt();
         sc.nextLine();
 
-        Student[] rooms = new Student[9];
+        Student[] rooms = new Student[10];
 
         for(int i = 0; i < quantityRoom; i++){
             System.out.println("\nRent #" + (i + 1));
@@ -28,7 +28,7 @@ public class Main {
             int room = sc.nextInt();
             sc.nextLine();
 
-            rooms[room] = new Student(name, email, room);
+            rooms[room] = new Student(name, email);
         }
 
         System.out.println("\nBusy rooms:");
