@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Java-Nelio.iml" filepath="$PROJECT_DIR$/Java-Nelio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exercicio-consolidacao/exercicio-consolidacao.iml" filepath="$PROJECT_DIR$/exercicio-consolidacao/exercicio-consolidacao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/funcoes-matematicas/funcoes-matematicas.iml" filepath="$PROJECT_DIR$/funcoes-matematicas/funcoes-matematicas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/funcoes-string/funcoes-string.iml" filepath="$PROJECT_DIR$/funcoes-string/funcoes-string.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ler-imprimir-dados/ler-imprimir-dados.iml" filepath="$PROJECT_DIR$/ler-imprimir-dados/ler-imprimir-dados.iml" />
+    </modules>
+  </component>
+</project>
