@@ -17,6 +17,8 @@
 
     * Tamanho da Lista: size()
 
+    * Posição index da Lista: get(i) que seria parecido com array[i] 
+
     * Inserir elemento na lista: add(obj), add(int,obj)
         Onde add(int, obj) o int é o index
 
