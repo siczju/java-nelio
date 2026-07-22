@@ -18,7 +18,7 @@ public class Instanciando_data_hora {
 
         // Pegar um texto ISO 8601 e gerar uma Data-hora apartir dele
         LocalDate d04 = LocalDate.parse("2022-07-20");
-        System.out.println("d04 = " + d04);
+        System.out.println("\nd04 = " + d04);
 
         LocalDateTime d05 = LocalDateTime.parse("2022-07-20T01:30:26"); // 1 da manha 30 minutos e 26 segundos
         System.out.println("d05 = " + d05);
@@ -26,11 +26,11 @@ public class Instanciando_data_hora {
         Instant d06 = Instant.parse("2022-07-20T01:30:26Z"); // Com Z no final pois é Zulu/GMT/UTC
         System.out.println("d06 = " + d06);
 
-        // E se eu quiser especificar um horário do Brasil e vira um horário equivalente no GMT
+        // E se eu quiser especificar um horário do Brasil e virar um horário equivalente no GMT
         Instant d07 = Instant.parse("2022-07-20T01:30:26-03:00"); // No lugar do Z coloca MENOS (-) / MAIS (+) e a qtde de horas q está adiantada/atrasada.
             // Então supondo q to no horário de são paulo q é 3 horas atrasado, eu coloco ele e -03:00, assim o horário de GMT vai vir certo 3 horas a mais
             // Então se é 11 horas em sp vai retornar 14 horas em GMT
-        System.out.println("d07 = " + d07);
+        System.out.println("\nd07 = " + d07);
 
 
         // Texto formato customizado -> Data-hora (Usar a classe DateTimeFormatter para definir o padrão)

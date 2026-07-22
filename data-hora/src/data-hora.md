@@ -58,16 +58,26 @@
 
     * Instanciação
         -> Tenho que saber instanciar um momento atual e gerar um data-hora apartir disso. (agora) -> Data-hora
+            LocalDate / LocalDateTime / Instant  -> .now()
         -> Texto ISO 8601 -> Data-hora
+            LocalDate / LocalDateTime / Instant -> .parse("2022-06-16T13:23:54.23Z")
         -> Texto formato customizado -> Data-hora
+            LocalDateTime.parse("20/07/2022 01:30", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         -> dia, mês, ano, [horário] -> Data-hora local
+            LocalDateTime.of(2022, 7, 20, 1, 30); 
 
     * Formatação
-        -> Data-hora -> Texto ISO 8601
+        -> Data-hora -> Texto ISO 8601 (Padrão)
         -> Data-hora -> Texto formato customizado
+            d04.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+        -> Data-hora global formatado / Instant formatado E no fuso horário do usuário
+            DateTimeFormatter fmt3 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").withZone(ZoneId.systemDefault());
+            System.out.println("\nd06 = " + fmt3.format(d06));
 
     * Obter dados de uma data-hora local
         -> Data-hora local -> dia, mês, ano, horário
+            LocalDate nextYearLocalDate = d04.plusYears(1);
+            Instant pastWeekInstant = d06.minus(7, ChronoUnit.DAYS);
 
     * Converter data-hora global para local
         -> Data-hora global, timezone (sistema local) -> Data-hora local
@@ -75,6 +85,7 @@
     * Cálculos com data-hora
         -> Data-hora +/- tempo -> Data-hora
         -> Data-hora 1, Data-hora 2 -> Duração
+            Duration t3 = Duration.between(pastWeekLocalDate.atStartOfDay(), d04.atStartOfDay()); -> com LocalDate
 
 ## Principais tipos Java (Versão 8+)
 
