@@ -1,178 +1,621 @@
 # Herança
 
-    -> É um tipo de associação que permite que uma classe herde todos dados e comportamentos de outra
+## O que é?
 
-    Vantagens: Reuso e Polimorfismo
+É um tipo de associação que permite que uma classe herde os atributos e comportamentos de outra.
 
-    Sintaxe: ClassA extends ClassB
+### Vantagens
 
-    super() -> Para executar a lógica do construtor da classe pai
+- Reuso de código
+- Polimorfismo
 
-    Modificador de acesso PROTECTED 
-        -> permite o acesso por outra classe do mesmo pacote e por subclasse independente do pacote
-    
-    -> Quando eu tenho composição entre duas classes, qnd eu instanciar eu vou ter 2 objetos.
-        Porém na herança qnd eu instancio uma classe que herda de outra, vou ter um objeto só
-        com todos os membros das duas classes.
+### Sintaxe
 
-## Upcasting e Downcasting
+```java
+class ClassA extends ClassB {
+}
+```
 
-    upcasting -> Casting da subclasse para superclasse ou seja 
-                 converter uma referência da classe filha para a classe pai.
-              -> Uso comum: polimorfismo
-    ex: Account acc = new BusinessAccount(); -> Atribui uma subclass para uma superclass
-        -> Porém não posso usar os metodos do BusinessAccount pois o tipo do objeto é Account
+### `super()`
 
-    downcasting -> casting da superclasse para subclasse
-                -> Palavra instanceof
-                -> Uso comum: métodos que recebem parâmetros genérico (ex: Equals)
-    ex: BusienssAccount acc2 = acc; -> vai dar erro pois não é seguro
-        -> Para fazer forçado: BusinessAccount acc2 = (BusinessAccount) acc2;
+Utilizado para executar o construtor da classe pai.
 
-    class Account {
-    }
+```java
+public BusinessAccount(Integer number, String holder, Double balance, Double loanLimit) {
+    super(number, holder, balance);
+    this.loanLimit = loanLimit;
+}
+```
 
-    class BusinessAccount extends Account {
-    }
-    
-    class SavingsAccount extends Account {
-    }
-    
-    Temos:
-    
-            Account
-            /     \
-    Business    Savings
-    
-    Uma BusinessAccount é uma Account
+### Modificador de acesso `protected`
 
-## Upcasting
-    Account acc = new BusinessAccount();
-    O que aconteceu? -> O objeto continua sendo um BusinessAccount.
-                        Só que agora você está olhando para ele como se fosse um Account.
+Permite acesso:
 
-    Objeto:
-    BusinessAccount
-    
-    Referência:
-    Account
+- Pela própria classe
+- Por classes do mesmo pacote
+- Por subclasses, mesmo que estejam em outro pacote
 
-###    Por que usar?
-        -> Porque normalmente trabalhamos com a classe mais genérica.
-    
-    Exemplo:
-    List<Account> contas = new ArrayList<>();
-    contas.add(new BusinessAccount());
-    contas.add(new SavingsAccount());
-    
-    A lista aceita qualquer tipo de conta (Account).
+### Herança x Composição
 
-    Outro exemplo:
-    
-    public void processar(Account conta) {
-    }
-    
-    Agora posso fazer:
-    
-    processar(new BusinessAccount());
-    processar(new SavingsAccount());
+#### Composição
 
-    Sem precisar criar vários métodos
+Ao instanciar uma classe que possui outra por composição, existem **dois objetos**.
 
-###    O que posso acessar?
-    
-    Somente aquilo que existe em Account.
-    
-    Account acc = new BusinessAccount();
-    
-    acc.deposit();
-    acc.withdraw();
-    
-    Mas isso NÃO:
-    
-    acc.loan(500); // ERRO pois é da classe BusinessAccount
-    Mesmo que o objeto seja BusinessAccount, a referência é Account.
+```text
+Pessoa
+ └── Endereco
+```
 
-## Downcasting (pai → filho)
+```
+Pessoa  ----------> Objeto Pessoa
+Endereco ---------> Objeto Endereco
+```
 
-    Agora é o contrário.
-    Você possui uma referência do pai e quer tratá-la como filha.
-    Isso precisa ser feito manualmente.
-    
-    Account acc = new BusinessAccount();
+---
+
+#### Herança
+
+Ao instanciar uma subclasse existe **apenas um objeto**, contendo os membros da classe pai e da classe filha.
+
+```java
+BusinessAccount b = new BusinessAccount();
+```
+
+```
+Objeto BusinessAccount
+
++ membros de Account
++ membros de BusinessAccount
+```
+
+---
+
+# Upcasting e Downcasting
+
+## Classe de exemplo
+
+```java
+class Account {
+}
+
+class BusinessAccount extends Account {
+}
+
+class SavingsAccount extends Account {
+}
+```
+
+Hierarquia:
+
+```
+        Account
+        /     \
+BusinessAccount  SavingsAccount
+```
+
+Uma **BusinessAccount é uma Account**.
+
+---
+
+# Upcasting
+
+## O que é?
+
+Conversão de uma referência da **subclasse** para a **superclasse**.
+
+É feito automaticamente.
+
+```java
+Account acc = new BusinessAccount();
+```
+
+ou
+
+```java
+BusinessAccount b = new BusinessAccount();
+Account acc = b;
+```
+
+---
+
+## O que aconteceu?
+
+O objeto continua sendo um **BusinessAccount**.
+
+Apenas a referência passou a ser do tipo **Account**.
+
+```
+Objeto:
+BusinessAccount
+
+Referência:
+Account
+```
+
+---
+
+## Por que usar?
+
+Porque normalmente trabalhamos com a classe mais genérica.
+
+Exemplo:
+
+```java
+List<Account> contas = new ArrayList<>();
+
+contas.add(new BusinessAccount());
+contas.add(new SavingsAccount());
+```
+
+A lista aceita qualquer tipo de conta.
+
+Outro exemplo:
+
+```java
+public void processar(Account conta) {
+}
+```
+
+Agora posso fazer:
+
+```java
+processar(new BusinessAccount());
+processar(new SavingsAccount());
+```
+
+Sem precisar criar vários métodos.
+
+---
+
+## O que posso acessar?
+
+Somente os membros existentes em `Account`.
+
+```java
+Account acc = new BusinessAccount();
+
+acc.deposit();
+acc.withdraw();
+```
+
+Isso **não** funciona:
+
+```java
+acc.loan(500);
+```
+
+❌ Erro de compilação.
+
+Mesmo que o objeto seja um `BusinessAccount`, a referência é do tipo `Account`.
+
+---
+
+# Downcasting
+
+## O que é?
+
+Conversão da referência da **superclasse** para a **subclasse**.
+
+Precisa ser feita manualmente.
+
+```java
+Account acc = new BusinessAccount();
+
+BusinessAccount b = (BusinessAccount) acc;
+```
+
+Observe o cast:
+
+```java
+(BusinessAccount)
+```
+
+---
+
+## Por que usar?
+
+Quando é necessário acessar métodos exclusivos da subclasse.
+
+```java
+BusinessAccount b = (BusinessAccount) acc;
+
+b.loan(1000);
+```
+
+Agora é possível utilizar `loan()`.
+
+---
+
+# Quando ocorre erro?
+
+Quando o objeto **não é realmente** daquele tipo.
+
+Exemplo:
+
+```java
+Account acc = new Account();
+
+BusinessAccount b = (BusinessAccount) acc;
+```
+
+Compila normalmente.
+
+Porém, em tempo de execução ocorre:
+
+```text
+ClassCastException
+```
+
+Porque um objeto `Account` **não é** um `BusinessAccount`.
+
+---
+
+Outro exemplo:
+
+```java
+Account acc = new SavingsAccount();
+
+BusinessAccount b = (BusinessAccount) acc;
+```
+
+Também gera:
+
+```text
+ClassCastException
+```
+
+Porque:
+
+```
+SavingsAccount ≠ BusinessAccount
+```
+
+São subclasses diferentes (irmãs).
+
+---
+
+# Como evitar o erro?
+
+Utilizando `instanceof`.
+
+```java
+if (acc instanceof BusinessAccount) {
+
     BusinessAccount b = (BusinessAccount) acc;
-    
-    Perceba o cast: (BusinessAccount)
 
-###    Por que usar?
-    
-    Porque às vezes você precisa acessar métodos exclusivos da classe filha.
-    
-    Exemplo:
-    
-    BusinessAccount b = (BusinessAccount) acc;
-    b.loan(1000);
-    
-    Agora pode chamar loan().
+}
+```
 
-## Quando dá erro?
+Assim o cast só será realizado quando realmente for seguro.
 
-    Quando o objeto não é daquele tipo.
-    
-    Veja:
-    
-    Account acc = new Account();
-    BusinessAccount b = (BusinessAccount) acc;
-    
-    isso compila mas em execução acontece: ClassCastException
-    Porque um Account comum não virou um BusinessAccount.
+---
 
-    Outro exemplo:
+# Quando usar Upcasting?
 
-    Account acc = new SavingsAccount();
-    BusinessAccount b = (BusinessAccount) acc;
-    
-    Também dá erro porque:
-    
-    SavingsAccount != BusinessAccount
-    
-    São irmãos então um nunca pode virar o outro.
+É extremamente comum.
 
-### Como evitar o erro?
+Usado em:
 
-    Usando instanceof.
+- Polimorfismo
+- `List<Account>`
+- Parâmetros de métodos
+- Retorno de métodos
+- Frameworks
 
-    Account acc = new BusinessAccount();
+---
 
-    Objeto: BusinessAccount
-    Referência: Account
+# Quando usar Downcasting?
 
-    if (acc instanceof BusinessAccount) {
-        BusinessAccount b = (BusinessAccount) acc;
+Muito menos frequente.
+
+É utilizado quando sabemos que o objeto pertence a uma determinada subclasse e precisamos acessar funcionalidades específicas dela.
+
+Se um projeto utiliza downcasting constantemente, normalmente isso indica que o polimorfismo poderia ter sido melhor aproveitado.
+
+---
+
+# Resumo
+
+| Upcasting | Downcasting |
+|-----------|-------------|
+| Filho → Pai | Pai → Filho |
+| Automático | Precisa de cast `( )` |
+| Sempre seguro | Pode gerar `ClassCastException` |
+| Muito utilizado | Pouco utilizado |
+| Perde acesso aos métodos específicos da filha | Recupera acesso aos métodos da filha |
+
+---
+
+# Entendendo na memória
+
+## Classe utilizada
+
+```java
+class Account {
+
+    public void withdraw() {
+        System.out.println("Saque");
     }
-    
-    Assim você só faz o cast se realmente puder.
 
-### Quando usar Upcasting?
+}
 
-    É muito usado em:
-        Polimorfismo
-        Listas (List<Account>)
-        Parâmetros de métodos
-        Retornos de métodos
-        Frameworks
+class BusinessAccount extends Account {
 
-### Quando usar Downcasting?
+    public void loan() {
+        System.out.println("Empréstimo");
+    }
 
-    Bem menos.
-    
-    Normalmente quando você sabe que aquele objeto é de um tipo específico e precisa acessar 
-    funcionalidades exclusivas da subclasse.
-    
-    Em projetos grandes, muitas vezes o uso frequente de downcasting é um sinal de que o design
-    pode ser melhorado usando polimorfismo.
+}
+```
 
-### Notas
+---
 
-    Upcasting ->  Account = BusinessAccount -> perde acesso aos métodos da BusinessAccount
-    DownCasting -> BusinessAccount = (BusinessAccount) Account -> recupera acesso aos métodos da filha
+## 1. Criando um objeto
+
+```java
+BusinessAccount b = new BusinessAccount();
+```
+
+Na memória:
+
+```text
+Stack (referências)             Heap (objetos)
+
+b ---------------------------> BusinessAccount
+                                 + withdraw()
+                                 + loan()
+```
+
+Como a referência também é `BusinessAccount`, podemos acessar tudo.
+
+```java
+b.withdraw();
+b.loan();
+```
+
+---
+
+## 2. Fazendo Upcasting
+
+```java
+Account acc = b;
+```
+
+Agora temos:
+
+```text
+Stack                           Heap
+
+b --------┐
+          │
+          ▼
+acc ------> BusinessAccount
+             + withdraw()
+             + loan()
+```
+
+Observe:
+
+- Existem **duas referências**.
+- Ambas apontam para **o mesmo objeto**.
+- O objeto continua sendo um `BusinessAccount`.
+
+Podemos fazer:
+
+```java
+acc.withdraw();
+```
+
+Mas:
+
+```java
+acc.loan();
+```
+
+❌ Erro de compilação.
+
+O compilador olha para o **tipo da referência (`Account`)**, não para o objeto.
+
+---
+
+## 3. Fazendo Downcasting
+
+```java
+BusinessAccount b2 = (BusinessAccount) acc;
+```
+
+Agora:
+
+```text
+Stack                           Heap
+
+b --------┐
+          │
+acc ------┼---------------------> BusinessAccount
+          │
+b2 -------┘
+```
+
+Agora existem **três referências** apontando para o mesmo objeto.
+
+Como `b2` é um `BusinessAccount`, podemos acessar:
+
+```java
+b2.withdraw();
+b2.loan();
+```
+
+Nenhum objeto foi criado.
+
+Nenhum objeto foi copiado.
+
+Apenas foi criada uma nova referência.
+
+---
+
+## 4. Downcasting inválido
+
+```java
+Account acc = new Account();
+
+BusinessAccount b = (BusinessAccount) acc;
+```
+
+Na memória:
+
+```text
+Stack                           Heap
+
+acc ---------------------------> Account
+                                  + withdraw()
+```
+
+O compilador aceita.
+
+Em execução ocorre:
+
+```text
+ClassCastException
+```
+
+Porque o objeto é um `Account`, e não um `BusinessAccount`.
+
+---
+
+## 5. Outro erro
+
+```java
+Account acc = new SavingsAccount();
+
+BusinessAccount b = (BusinessAccount) acc;
+```
+
+Na memória:
+
+```text
+Stack                           Heap
+
+acc ---------------------------> SavingsAccount
+```
+
+O objeto é um `SavingsAccount`.
+
+Você tentou tratá-lo como `BusinessAccount`.
+
+Resultado:
+
+```text
+ClassCastException
+```
+
+---
+
+## 6. Como evitar
+
+```java
+if (acc instanceof BusinessAccount) {
+
+    BusinessAccount b = (BusinessAccount) acc;
+
+}
+```
+
+`instanceof` verifica o tipo real do objeto antes do cast.
+
+---
+
+# O desenho mais importante
+
+## Antes do Upcasting
+
+```text
+BusinessAccount b
+        │
+        ▼
++----------------------+
+| BusinessAccount      |
+|----------------------|
+| withdraw()           |
+| loan()               |
++----------------------+
+```
+
+---
+
+## Depois do Upcasting
+
+```text
+BusinessAccount b ───┐
+                     │
+Account acc ─────────┤
+                     ▼
+            +----------------------+
+            | BusinessAccount      |
+            |----------------------|
+            | withdraw()           |
+            | loan()               |
+            +----------------------+
+```
+
+O objeto continua exatamente o mesmo.
+
+---
+
+## Depois do Downcasting
+
+```text
+BusinessAccount b ───┐
+                     │
+Account acc ─────────┤
+                     │
+BusinessAccount b2 ──┤
+                     ▼
+            +----------------------+
+            | BusinessAccount      |
+            |----------------------|
+            | withdraw()           |
+            | loan()               |
+            +----------------------+
+```
+
+Continuamos tendo **um único objeto**, apenas com mais referências apontando para ele.
+
+---
+
+# Regra de ouro
+
+> **O cast nunca altera o objeto.**
+
+Ele apenas muda **o tipo da referência**.
+
+O objeto continua sendo exatamente o mesmo na memória.
+
+---
+
+# Macete para decorar
+
+```
+Aluno é uma Pessoa.
+```
+
+Logo:
+
+```java
+Pessoa p = new Aluno();
+```
+
+✔ Upcasting (sempre seguro)
+
+Agora:
+
+```java
+Aluno a = (Aluno) p;
+```
+
+Só funciona se `p` realmente apontar para um objeto `Aluno`.
+
+Caso contrário:
+
+```text
+ClassCastException
+```
