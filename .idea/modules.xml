@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Java-Nelio.iml" filepath="$PROJECT_DIR$/Java-Nelio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/arquivos/arquivos.iml" filepath="$PROJECT_DIR$/arquivos/arquivos.iml" />
       <module fileurl="file://$PROJECT_DIR$/comportamento-de-memoria-arrays-listas/comportamento-de-memoria-arrays-listas.iml" filepath="$PROJECT_DIR$/comportamento-de-memoria-arrays-listas/comportamento-de-memoria-arrays-listas.iml" />
       <module fileurl="file://$PROJECT_DIR$/data-hora/data-hora.iml" filepath="$PROJECT_DIR$/data-hora/data-hora.iml" />
       <module fileurl="file://$PROJECT_DIR$/enumeracoes-composicao/enumeracoes-composicao.iml" filepath="$PROJECT_DIR$/enumeracoes-composicao/enumeracoes-composicao.iml" />
