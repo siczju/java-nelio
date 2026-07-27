@@ -31,11 +31,15 @@ public class Program {
         Integer installmentsQuantity = sc.nextInt();
 
         Contract contract = new Contract(numberContract, date, contractValue);
+
         ContractService contractService = new ContractService(new PaypalService());
+
         contractService.processContract(contract, installmentsQuantity);
 
         for(Installment aux : contract.getInstallmentsList()){
             System.out.println(aux);
         }
+
+        sc.close();
     }
 }

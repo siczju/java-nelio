@@ -85,3 +85,47 @@ new EuropeTaxService()
 Sem alterar nenhuma linha da classe `RentalService`.
 
 > **Resumo:** A classe depende da abstração (`TaxService`), e não da implementação (`BrazilTaxService`). Isso deixa o código mais flexível, reutilizável e facilita a manutenção.
+
+## Herdar vs Cumprir contrato 
+
+    Em ambos os casos eu tenho uma relação "é-um", polimorfismo e o conceito de generalização/especialização
+    
+    Diferença:
+        Herança -> reuso de informações e comportamentos
+        Interface -> contrato a ser cumprido
+
+## Herança multipla e o problema do diamante
+    -> A herança multipla pode gera o problema do diamante: uma ambiguidade causada pela
+        existência do mesmo método em mais de uma superclasse
+    -> Herança múltipla não é permitida na maioria das linguagens
+
+## Interface Comparable
+    
+```java
+public interface Comparable<T>{
+    int compareTo(T o);
+}
+```
+
+## Default methods (Defender methods)
+    -> Interfaces podem conter métodos concretos
+    -> A intenção básica é prover implementação padrão para métodos, de modo a evitar:
+        1) repetição de implementação em toda classe que implemente a interface
+        2) a necessidade de se criar classes abstratas para prover reuso de implementação
+
+    Outras vantagens:
+        * Manter a retrocompatibilidade com sistemas existentes
+        * Permitir que "interfaces funcionais" (que devem conter apenas um método)
+            possam prover operações padrão reutilizaveis
+
+```java
+public interface InteresetServices{
+    default double getInterestRate(){
+        return payment();
+    }
+    double payment(double amount, int months);
+}
+```
+
+    Agora as interfaces podem prover reuso
+    Ainda é mt diferente de classe abstrata pois interface não possuem recursos tais como construtores e atributos
