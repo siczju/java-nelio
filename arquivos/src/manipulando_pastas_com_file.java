@@ -21,6 +21,14 @@ public class manipulando_pastas_com_file {
             System.out.println(folder);
         }
 
+        File[] files = path.listFiles(File::isFile);
+
+        System.out.println("FILES: ");
+        for (File file : files)
+            System.out.println(file);
+
+        boolean sucess = new File(strPath + "\\subdir").mkdir(); // criar uma subpasta dentro do \temp
+        System.out.println("Directory created sucessfully: " + sucess);
 
         sc.close();
     }
