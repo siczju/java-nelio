@@ -78,3 +78,131 @@ Collections.sort(lista, comparator);
 | Método `compareTo()` | Método `compare()` |
 | Um critério de ordenação | Vários critérios de ordenação |
 | Implementado pela própria classe | Implementado em outra classe |
+
+## Tipos Curingas (wildcard types)
+
+    -> Generics são invariantes.
+    List<Object> -> não é o supertipo de qualqeur tipo de lista
+    
+
+```java
+    List<Object> myObjs = new ArrayList<Object>();
+    List<Integer> myNumbers = new ArrayList<Integer>();
+    myObjs = myNumbers; // erro de compilação
+```    
+
+    -> O supertipo de qualqeur tipo de lista é List<?>. Este é um tipo curinga:
+
+```java
+    List<?> myObjs = new ArrayList<Object>();
+    List<Integer> myNumbers = new ArrayList<Integer>();
+    myObjs = myNumbers; // funciona 
+```    
+
+    -> Com tipos curinga podemos fazer métodos que recebem um genérico de "qualquer tipo"
+
+```java
+
+    public ... main(){
+        List<Integer> myInts = Arrays.asList(5,2,10);
+        printList(myInts);
+    }
+    
+    public static void printList(List<?> list){
+        for(Object obj : list){
+            System.out.println(obj);
+        }
+    }
+
+```
+
+    -> Porém não é possível adicionar dadosa a uma coleção de tipo curinga
+
+```java
+    List<?> list = new ArrayList<>();
+    list.add(3); // erro de compilação
+```
+
+## Curingas delimitados (bounded wildcards)
+
+```java
+
+    public static double totalArea(List<Pessoa> list){}
+    // Se receber uma lista de um subtipo de Pessoa, da erro.
+    
+    public static double totalArea(List<? extends Pessoa> list){} 
+    // Agora posso receber uma lista de Pessoas ou de qualquer tipo q extenda de Pessoa
+
+```
+
+    -> porém  continuamos sem conseguir adicionar elementos a essa lista. que seja do tipo <?>
+
+## Hashcode e Equals
+    -> São operações da classe Object utilizadas para comparasr se um objeto é
+        igual ao outro
+
+    -> equals: lento, resposta 100%
+    -> hashCode: rápido, porém resposta positiva não é 100%
+
+    -> Tipos comuns (String, Date, Integer, Double, etc.) já possuem implementação
+        para essas operações. Classes personalizadas precisam sobrepô-las.
+
+    Equals:
+        -> método que compara se o objeto é igual ao outro, retornando true/falso
+    
+    String a = "Maria";
+    String b = "Alex";
+    System.out.println(a.equals(b)); -> retorna false
+
+    hashCode:
+        -> Método que retorna um número inteiro representando um código gerado
+            a partir das informações do objeto
+
+    String a = "Maria";
+    String b = "Alex";
+     System.out.println(a.hashCode()); -> retorna 12312
+     System.out.println(b.hashCode()); -> retorna 41233
+
+    -> porém se forem objetos iguais vão retornar o mesmo código
+    -> Mas posso ter objetos diferentes q coincidentemente geraram o mesmo hashcode
+    -> Mas não acontece do mesmo objeto gerar códigos diferentes
+
+## Set<T> -> Interface
+    -> Representa um conjunto de elementos 
+    -> Não admite repetições
+    -> Elementos não possuem posição
+    -> Acesso, inserção e remoção de elementos são rápidos
+    -> Oferece operações eficientes de conjunto: interseção, união, diferença
+    -> Principais implementações:
+        -> HashSet -> mais rápido (operações O(1) em tabela hash) e não ordenado
+        -> TreeSet -> mais lento (operações O(log(n)) em árvore rubro-negra)
+                        e ordenadoo pelo compareTo do objeto (ou Comparator)
+        -> LinkedhashSet -> velocidade intermediária e elementos na ordem em 
+                            que são adicionados 
+
+    Métodos importantes
+        -> add(obj), remove(obj), contains(obj)
+        (Baseado em equals e hashCode.)
+        (Se equals e hashCode não existir, é usada comparação de ponteiros.)
+    -> clear(), size(), removeIf(predicate)
+    -> addAll(other) - união: adiciona no conjunto os elementos do outro conjunto, 
+        Ssem repetição
+    -> retainAll(other) - interseção: remove do conjunto os elementos não contidos
+        em other. Ou seja so elementos em comum
+    -> removeAll(other) - diferença: remove do conjunto os elementos contidos
+        em other
+
+```java
+
+    Set<String> set = new HashSet<>();
+    
+    set.add("TV");
+    set.add("Notebook");
+    set.add("Tablet");
+    
+    System.out.println(set.contains("Notebook"));
+    
+    for(String p : set){
+        System.out.println(p)
+            }
+```

@@ -18,15 +18,17 @@ public class Main {
         list.add(new Fruta<>(132, "Amora"));
 
         //Collections.sort(list); // Comparable
-        //Collections.sort(list, fValor); // Classe Comparator
-        Collections.sort(list, fNome); // Classe Comparator
+        Collections.sort(list, fValor); // Classe Comparator
+        //Collections.sort(list, fNome); // Classe Comparator
 
         for(Fruta print : list)
             System.out.print(print.valor + ", " + print.nome + "\n");
 
+        /*
         if(new FrutaComparatorValor().compare(list.get(0), list.get(1)) > 0){
             System.out.println("Banana é mais cara que a maça");
         }
+         */
 
     }
 }
