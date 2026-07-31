@@ -206,3 +206,46 @@ Collections.sort(lista, comparator);
         System.out.println(p)
             }
 ```
+
+    Como o set testam igualdade?
+        -> Se hashCode e equals estiverem implementados:
+            * Primeiro hashCode. Se der igual, usa equals para confirmar.
+            * Lembre-se: String, Integer, Double, etc. Ja possuem equals/hashCode
+        -> Se hashCode e equals não estiverem implementados:
+            * Compara as referências (ponteiros) dos objetos.
+
+    Como o TreeSet compara os elementos?
+        -> Com o compareTo, então a classe que estiver sendo generalizada pelo TreeSet
+        ex: Set<Product> set = new TreeSet<>();
+        -> Esse Product, ele obrigatoriamente tem que implementar Comparable<T>
+
+## Map<K,V>
+
+    -> É uma coleção de pares chave/valor -> onde chave/valor podem ser de qualquer tipo
+        * Não admite repetições do objeto chave
+        * Os elementos são indexados pelo objeto chave (não possuem posição)
+        * Acesso, inserção e remoção de elementos são rápidos
+
+    -> Uso comum: cookies, local storage, qualquer modelo chave-valor
+
+    -> Principais implementações:
+        * HashMap - mais rápido (operações O(1) em tabela hash) e não ordenado
+        * TreeMap - mais lento (operações O(log(n)) em àrevore rubro-negra) e ordenado pelo
+                    compareTo do objeto (ou Comparator)
+        * LinkedHashMap - velocidade intermediária e elementos na ordem em que são adicionadas
+
+    -> Alguns métodos importantes:
+        * put(key, value) serve para inserir, remove(key), containsKey(key), get(key)
+            -> baseado em equals e hashcode
+            -> se equals e hashcode não existir, é usada comparação de ponteiros (referencia)
+        * clear(), size().
+        * keySet() - retorna um Set<K> (lista de elementos) com as chaves do Map
+        * values() - retorna um Collection<V> (lista de elementos) com os valores do meu Map
+
+```java -> para percorrer um Map (supondo que a chave é tipo string e o map chama cookiesMap)
+    
+    for(String key : cookiesMap.keySet()){
+        
+            }
+
+```
