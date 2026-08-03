@@ -1,4 +1,4 @@
-package testandoGenerics;
+package testandoGenericsComparator;
 
 import java.util.Comparator;
 

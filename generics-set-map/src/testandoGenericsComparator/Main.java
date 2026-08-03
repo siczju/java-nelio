@@ -1,4 +1,4 @@
-package testandoGenerics;
+package testandoGenericsComparator;
 
 import java.util.ArrayList;
 import java.util.Collections;
