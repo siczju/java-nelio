@@ -1,0 +1,116 @@
+# Programação Funcional e Lambda
+    Interface funcional -> tem apenas um método abstrato porém pode ter também
+                            métodos default e estáticos.
+
+## Comparator
+    -> Interface Funcional do Java 8
+
+    -> Método importante (abstrato) compare(T o1, T o2), recebe dois objetos do tipo T
+        para serem comparados e esse método retornará um int
+
+```java
+    // Jeito 1 de fazer o Comparator para fazer o List.sort():
+
+    public class MyComparator implements Comparator<Product> {
+
+    	@Override
+    	public int compare(Product p1, Product p2) {
+    		return p1.getName().compareTo(p2.getName().toUpperCase());
+    	}
+    }
+
+    psv... main(String[] args) {
+
+        List<Product> list = new ArrayList<>();
+
+        list.add(new Product("TV", 900.00));
+        list.add(new Product("Notebook", 1200.00));
+
+        list.sort(new MyComparator());
+    }
+
+    // Jeito 2 de fazer (Anonymous class):
+
+    psv main(String[] args){
+
+        Comparator<Product> comp = new Comparator<Product>() {
+            @Override
+            public int compare(Product p1, Product p2) {
+                return p1.getName().compareTo(p2.getName());
+            }
+        };
+
+        list.sort(comp);
+
+    }
+
+    // Jeito 3 de fazer (Lambda 1)
+
+    psv main(String[] args){
+
+        Comparator<Product> comp = (p1, p2) -> {
+            return p1.getName().compareTo(p2.getName());
+            };
+
+            list.sort(comp);
+
+    }
+
+    // Jeito 4 de fazer (Lambda 2):
+
+    psv main(String[] args){
+
+        list.sort((p1, p2) -> p1.getName().compareTo(p2.getName()));
+
+    }
+
+```
+
+    Anonymous Class = cria uma classe (ou subclasse) sem dar um nome a ela. Funciona com
+                  interfaces e classes.
+
+    Lambda = forma reduzida de implementar o único método abstrato de uma interface  funcional.
+
+    Só interfaces funcionais podem usar lambda, porque o Java precisa saber exatamente qual
+        método a lambda representa. Se houvesse dois métodos abstratos, haveria ambiguidade.
+
+
+## Expressão lambda
+    -> Corresponde a uma função anônima de primeira classe (não declarada, sem nome,
+        e pode ser passada como argumentos para outras funções)
+
+```java
+
+    public class Program{
+
+        public static int compareProducts(Product p1, Product p2) {
+            return p1.getPrice().compareTo(p2.getPrice());
+        }
+
+        public static void main(String[] args){
+
+            list.sort(Program::compareProducts);
+            list.sort((p1,p2) -> p1.getPrice().compareTo(p2.getPrice()));
+        }
+    }
+
+   }
+
+```
+
+## Interface funcional ( Predicate, Function, Consumer, Comparator...)
+    -> É uma interface que possui um único método abstrato. Suas implementações serão
+        tratadas como expressões lambda.
+
+### Predicate
+
+```java
+    public interface Predicate<T> {
+        boolean test(T t);
+    }
+```
+
+
+### Function
+
+### Consumer
