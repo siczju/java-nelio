@@ -108,9 +108,388 @@
     public interface Predicate<T> {
         boolean test(T t);
     }
+
+    public class ProductPredicate implements Predicate<Product>{
+        @Override
+        public boolean test(Product p){
+            return p.getPrice() >= 100.0;
+        }
+    }
+
+    psv main(String[] args){
+
+        list.removeIf(new ProductPredicate());
+        OU (não precisa criar classe ProductPredicate e ja passa a funcao direto)
+        list.removeIf(p -> p.getPrice() >= 100.0); (Expressão lambda inline)
+    }
+
+    // Porém ainda tem várias possibilidades de fazer isso:
+        * Implementação da interface (ja fizemos ProductPredicate)
+        * Reference method com método estático
+        * Reference method com método não estático
+        * Expressão lambda declarada
+        * Expressão lambda inline
+
+    // Reference method com método estático
+        -> Na propria classe Product criar um método estático
+
+    class Product{
+        ...
+        public static boolean staticProductPredicate(Product p){
+            return p.getPrice() => 100.0
+        } // assim não precisa criar uma classe separada implementando Predicate
+    }
+
+    psv main(String[] args){
+        list.removeIf(Product::staticProductPredicate); // method reference (::)
+    }
+
+    // Reference method com método não estático
+
+    class Product{
+        // como não é um método estático não precisa passar argumento pois ele
+            vai trabalhar com o atributo da propria classe
+        public boolean nonStaticProductPredicate(){
+            return p.getPrice() >= 100.0;
+    }
+
+    psv main(String[] args){
+        list.removeIf(Product::nonStaticProductPredicate); // method reference (::)
+    }
+
+    // Expressão lambda declarada
+
+    psv main(String[]){
+
+        Predicate<Product> pred = (p) -> p.getPrice() >= 100;
+        list.removeif(pred);
+    }
+
+    // Expressão lambda inline
+
+    psv main(String[] args){
+        list.removeIf(p -> p.getPrice() >= 100.0);
+    }
+
 ```
 
+### Consumer
+    ->
+
+    // 5 versões que podemos fazer:
+        * Implementação da Interface
+        * Reference method com método estático
+        * Reference method com método não estático
+        * Expressão lambda declarada
+        * Expressão lambda inline
+
+```java
+
+    public interface Consumer<T>{
+        void accept(T t);
+    }
+
+    // Problema: a partir de uma lista de produtos aumente o preço dos produtos em 10%
+
+    psv main(String[] args) {
+
+        List<Product> list = new ArrayList();
+
+        list.add(new Product("TV", 900.0));
+        list.add(new Product("Mouse", 300.0));
+
+        list.forEach(); // recebe um consumer como parametro. É um default method q
+                            percorre a coleção e executar um consumer nessa coleção
+                            para cada elemento
+    }
+
+    public class PriceUpdate implements Consumer<Product>{
+
+        public void accept(Product p){
+            p.setPrice(p.getPrice() * 1.1);
+        }
+    }
+
+    psv main(String[] args) {
+        list.forEach(new PriceUpdate()); // isso vai atualizar o preco de todos produtos da lista
+        list.foreach(System.out::println); // vai imprimir todosos produtos
+    }
+
+    // Reference method com método estático
+
+    class Product {
+        public static void staticPriceUpdate(Product p){
+            p.setPrice(p.getPrice() * 1.1);
+        }
+    }
+
+    psv main(String[] args) {
+        list.foreach(Product::staticPriceUpdate);
+    }
+
+    // Reference method com método não estático
+
+    class Product {
+        public static void nonStaticPriceUpdate(){
+            price = price * 1.1;
+        }
+    }
+
+    psv main(String[] args) {
+        list.foreach(Product::nonStaticPriceUpdate);
+    }
+
+    // Expressão lambda declarada
+
+        psv main(String[] args) {
+
+            Consumer<Product> cons = p -> p.setPrice(p.getPrice() * 1.1);
+
+            list.foreach(cons);
+        }
+
+    // Expressão lambda inline
+
+    psv main(String[] args){
+        list.foreach(p -> p.setPrice(p.getPrice() * factor));
+    }
+
+```
 
 ### Function
 
-### Consumer
+        // 5 versões que podemos fazer:
+            * Implementação da Interface
+            * Reference method com método estático
+            * Reference method com método não estático
+            * Expressão lambda declarada
+            * Expressão lambda inline
+
+```java
+    public interface Function<T, R> {
+        R apply(T t); // Recebe um T e retorna um R
+    }
+
+    // Problema exemplo: a partir de uma lista de produtos gere uma nova lista
+        contendo os nomes dos produtos em caixa alta
+
+    // pois vai receber um objeto Product e retornar uma string em caixa alta
+    public class UpperCaseName implements Function<Product, String> {
+
+        @Override
+        public String apply(Product p) {
+            return p.getName().toUpperCase();
+        }
+    }
+
+    // Agora temos q aplicar a function para todo elemento da lista
+    // para isso usaremos o map.
+        * A função "map" (não confunda com a estrutura de dados Map)é uma função
+            que aplica uma function a todos elementos de uma stream
+    // Conversões:
+        * List para stream -> .stream()
+        * Stream para List -> .collect(Collectors.toList())
+
+    // Então vamos ter que convertar a List em stream para fazer o map e dps converter dnv para list
+
+    psv main(String[] args){
+        List<String> names = list.stream().map(new UpperCaseName()).collect(Collectors.toList());
+    }
+
+    // Reference method com método estático
+
+    class Product{
+        public static String staticUpperCaseName(Product p){
+            return p.getName().toUpperCase();
+        }
+    }
+
+    psv main(String[] args){
+
+        List<String> names = list.stream()
+                                  .map(Product::staticUpperCaseName)
+                                  .collect(Collectors.toList());
+    }
+
+    // Reference method não estático
+      class Product{
+            public String nonStaticUpperCaseName(){
+                return nome.toUpperCase();
+            }
+        }
+
+        psv main(String[] args){
+
+            List<String> names = list.stream()
+                                      .map(Product::nonStaticUpperCaseName)
+                                      .collect(Collectors.toList());
+        }
+
+   // Expressão lambda separada
+
+   psv main(String[] args){
+
+        Function<Product, String> func = p -> p.getName().toUpperCase();
+        List<String> names = list.stream()
+                                  .map(func)
+                                  .collect(Collectors.toList());
+   }
+
+   // Expressão lambda inline
+
+   psv main(String[] args){
+        List<String> names = list.stream()
+                                  .map(p -> p.getName().toUpperCase())
+                                  .collect(Collectors.toList());
+   }
+```
+
+## Criando funções que recebem funções como parâmetro
+
+    Recordando:
+        * RemoveIf(Predicate); // Predicado é uma função que recebe um objeto
+                                    e retorna um verdadeiro/falso
+        * forEach(Consumer)
+        * map(Function)
+
+    // Problema exemplo: a partir de uma lista de produtos, clacule a soma
+        dos preços somente dos produtos cujo nome começa com "T"
+
+```java
+
+
+    public class ProductService{
+        public double filteredSum(List<Product> list) {
+            double sum = 0.0;
+
+            for(Product p : list) {
+                if(p.getName().charAt(0) == T)
+                    sum += p.getPrice();
+            }
+            return sum
+        }
+    }
+
+    psv main(String[] args){
+        List<Product> list = new ArrayList<>();
+
+        list.add(new Product("Tv", 900));
+        list.add(new Product("Tablet", 350));
+
+        ProductService ps = new ProductService();
+
+        double sum = ps.filteredSum(list);
+
+        System.out.println("Sum = " + String.format("%.2f", sum);
+    }
+
+    // Função filteredSum melhorada com predicado
+
+    class ProductService{
+        public double filteredSum(List<Product> list, Predicate<Product> criteria){
+            double sum = 0.0
+            for(Product p : list) {
+                if (criteria.test(p){
+                    sum += p.getPrice();
+                }
+            }
+            return sum;
+        }
+    }
+
+    psv main{
+        double sum = ps.filteredSum(list, p -> p.getName().charAt(0));
+    }
+
+```
+
+## Stream
+    -> É uma sequencia de elementos advinda de uma fonte de dados que oferece
+        suporte a operações agregadas
+        * Fonte de dados: coleção, array, função de iteração, recursos de e/s
+
+    -> Stream é uma solução para processar sequência de dados de forma:
+        * Declarativa (iteração interna: escondida do programador)
+        * Parallel-friendly (imutalve -> thread safe)
+        * Sem efeitos colaterais
+        * Sob demanda (lazy evaluation)
+
+    -> Acesso sequencial (não há índices)
+    -> Single use: só pode ser usada uma vez
+    -> Pipeline: operações em streams retornam novas streams. Então
+                 é possível criar uma cadeia de operações (fluxo de processamento)
+
+    - Operações Intermediárias e Terminais
+    -> O Pipeline é composto por zero ou mais operações intermediárias e uma terminal
+
+    Operação intermediária:
+        -> Produz uma nova streams (encadeamento)
+        -> Só executa quando uma operação terminam é invocada (lazy evaluation)
+
+    Operação terminal:
+        -> Produz um objeto não-stream (coleção ou outro)
+        -> Determina o fim do processamento da stream
+
+    Operações intermediárias:
+        * filter
+        * map
+        * flatmap
+        * peek
+        * distinct
+        * sorted
+        * skip
+        * limit (*)
+
+    Operações terminais:
+        * forEach
+        * forEachOrdered
+        * toArray
+        * reduce
+        * collect
+        * min
+        * max
+        * count
+        * anyMatch(*)
+        * allMatch(*)
+        * noneMatch(*)
+        * findFirst(*)
+        * findAny(*)
+
+        (*) -> short-circuit -> quando o programa achar o primeiro elementa que satisfaça
+                                a condição ele para de processar pq vai saber q satisfez
+
+
+    Como criar uma stream
+        -> Basta chamar o método stream() ou parallelStream() a partir de qualquer
+            objeto Collection
+
+    Outras formas de se cirar uma stream incluem:
+        * Stream.of
+        * Stream.ofNullable
+        * Stream.iterate
+
+```java
+
+    main{
+        List<Integer> list = Arrays.asList(3,4,5,10,7);
+
+        Stream<Integer> st1 = list.stream();
+
+        // Para imprimir a stream na tela: (convertendo ela para um vetor)
+
+        sysout(Arrays.toString(st1.toArray()));
+
+        Stream<Integer> st2 = st1.map(x -> x * 10); // Ele multiplicou cada um dos elementos por 10 e gerou uma nova stream como resultado
+
+        // Criando stream na mão
+        Stream<String> st3 = Stream.of("Maria", "Alex", "Box");
+        sysout(Arrays.toString(st2.toArray()));
+
+        // Função de iteração
+        Stream<Integer> st4 = Stream.iterate(0, x -> x + 2); (primeiroElemento, funçãoDeIteração)
+        // short-circuit (para parar) -> pois a s4 é infinita soma 2 infinitamente.
+        sysout(Arrays.toString(st3.limit(10).toArray()));
+        // então ele da um limite de 10 iterações
+    }
+
+```
