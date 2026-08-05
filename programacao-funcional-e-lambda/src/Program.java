@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class Program {
     public static void main(String[] args){
 
-        String path = "C:\\Users\\JúlioCésar\\source\\github\\java-nelio\\programacao-funciona-e-lambda\\src\\in.csv";
+        String path = "C:\\Users\\JúlioCésar\\source\\github\\java-nelio\\programacao-funcional-e-lambda\\src\\in.csv";
 
         List<Employee> list = new ArrayList<>();
 
