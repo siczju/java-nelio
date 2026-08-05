@@ -16,7 +16,7 @@
       <module fileurl="file://$PROJECT_DIR$/heranca-polimorfismo/heranca-polimorfismo.iml" filepath="$PROJECT_DIR$/heranca-polimorfismo/heranca-polimorfismo.iml" />
       <module fileurl="file://$PROJECT_DIR$/interfaces/interfaces.iml" filepath="$PROJECT_DIR$/interfaces/interfaces.iml" />
       <module fileurl="file://$PROJECT_DIR$/ler-imprimir-dados/ler-imprimir-dados.iml" filepath="$PROJECT_DIR$/ler-imprimir-dados/ler-imprimir-dados.iml" />
-      <module fileurl="file://$PROJECT_DIR$/programacao-funciona-e-lambda/programacao-funciona-e-lambda.iml" filepath="$PROJECT_DIR$/programacao-funciona-e-lambda/programacao-funciona-e-lambda.iml" />
+      <module fileurl="file://$PROJECT_DIR$/programacao-funcional-e-lambda/programacao-funcional-e-lambda.iml" filepath="$PROJECT_DIR$/programacao-funcional-e-lambda/programacao-funcional-e-lambda.iml" />
       <module fileurl="file://$PROJECT_DIR$/tratamente-de-excecoes/tratamente-de-excecoes.iml" filepath="$PROJECT_DIR$/tratamente-de-excecoes/tratamente-de-excecoes.iml" />
     </modules>
   </component>
