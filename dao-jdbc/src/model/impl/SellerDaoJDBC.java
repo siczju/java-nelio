@@ -53,17 +53,8 @@ public class SellerDaoJDBC implements SellerDao {
             rs = st.executeQuery();
 
             if(rs.next()){ // pro rs ver se tem algum resultado, pois qnd começa o rs aponta pro 0 e os valores começa no 1
-                Department dep = new Department();
-                dep.setId(rs.getInt("departmentid"));
-                dep.setName(rs.getString("depname"));
-
-                Seller obj = new Seller();
-                obj.setId(rs.getInt("id"));
-                obj.setName(rs.getString("name"));
-                obj.setDepartment(dep);
-                obj.setEmail(rs.getString("email"));
-                obj.setBasesalary(rs.getDouble("basesalary"));
-                obj.setBirthdate(rs.getDate("birthdate").toLocalDate());
+                Department dep = instantiateDepartment(rs);
+                Seller obj = instantiateSeller(rs, dep);
 
                 return obj;
             }
@@ -76,6 +67,24 @@ public class SellerDaoJDBC implements SellerDao {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
         }
+    }
+
+    private Seller instantiateSeller(ResultSet rs, Department dep) throws SQLException {
+        Seller obj = new Seller();
+        obj.setId(rs.getInt("id"));
+        obj.setName(rs.getString("name"));
+        obj.setDepartment(dep);
+        obj.setEmail(rs.getString("email"));
+        obj.setBasesalary(rs.getDouble("basesalary"));
+        obj.setBirthdate(rs.getDate("birthdate").toLocalDate());
+        return obj;
+    }
+
+    private Department instantiateDepartment(ResultSet rs) throws SQLException {
+        Department dep = new Department();
+        dep.setId(rs.getInt("departmentid"));
+        dep.setName(rs.getString("depname"));
+        return dep;
     }
 
     @Override
