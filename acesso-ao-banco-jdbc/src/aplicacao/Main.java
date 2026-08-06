@@ -1,40 +1,42 @@
 package aplicacao;
 
 import db.DB;
+import db.DbIntegrityException;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+
 public class Main {
-    public static void main (String[] args){
+    public static void main(String[] args) {
 
         Connection conn = null;
         PreparedStatement st = null;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        try{
+
+        try {
             conn = DB.getConnection();
 
             st = conn.prepareStatement(
-                    "UPDATE seller "
-                    + "SET basesalary = basesalary + ? " // para incrementar
+                    "DELETE FROM seller "
                     + "WHERE "
-                    + "(departmentid = ?)"
+                    + "id = ?"
             );
 
-            st.setDouble(1, 200.0);
-            st.setInt(2, 2);
+            st.setInt(1, 2);
 
-            int rows = st.executeUpdate();
+            int rowsAffected = st.executeUpdate(); // qnts linhas foram alteradas no banco
 
-            System.out.println("Rows affected: " + rows);
+            System.out.println("Rows affected: " + rowsAffected);
 
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally{
-            DB.closeStatement(st);
-            DB.closeConnection();
-        }
+            throw new DbIntegrityException(e.getMessage());
+        } finally {
 
+            DB.closeStatement(st);
+            DB.closeConnection(); // sempre fecha a conexão por ultimo!
+        }
     }
 }
