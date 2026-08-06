@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal" created-in="IU-262.8665.258">
-    <data-source name="postgres@localhost" uuid="5832eab1-51e9-4cea-b050-79a6eb5021b3">
-      <database-info product="PostgreSQL" version="18.4" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.7.3" dbms="POSTGRES" exact-version="18.4" exact-driver-version="42.7">
-        <identifier-quote-string>&quot;</identifier-quote-string>
-      </database-info>
-      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+    <data-source name="coursejdbc@localhost" uuid="a86a3a1e-7818-4228-b5f1-ada1155041d4">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" />
       <secret-storage>master_key</secret-storage>
       <user-name>postgres</user-name>
-      <schema-mapping>
-        <introspection-scope>
-          <node kind="database" qname="@">
-            <node kind="schema" qname="@" />
-          </node>
-        </introspection-scope>
-      </schema-mapping>
+      <schema-mapping />
     </data-source>
   </component>
 </project>

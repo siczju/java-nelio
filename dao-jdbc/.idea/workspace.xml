@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="80d45970-425b-4289-84d4-0d9016995ae0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/postgresql_42_7_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/db/DB.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/db/DbException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/db/DbIntegrityException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/entities/Department.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/entities/Seller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +13,7 @@
   <component name="DatabaseLocalColorSettings">
     <colors>
       <entry key="5832eab1-51e9-4cea-b050-79a6eb5021b3" value="" />
+      <entry key="a86a3a1e-7818-4228-b5f1-ada1155041d4" value="" />
     </colors>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -44,6 +37,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Program.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
