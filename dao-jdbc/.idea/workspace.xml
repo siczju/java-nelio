@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="80d45970-425b-4289-84d4-0d9016995ae0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/application/Program2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/impl/DepartmentDaoJDBC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/5832eab1-51e9-4cea-b050-79a6eb5021b3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/5832eab1-51e9-4cea-b050-79a6eb5021b3/storage_v2/_src_/database/postgres.edMnLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/5832eab1-51e9-4cea-b050-79a6eb5021b3/storage_v2/_src_/database/postgres.edMnLQ/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/5832eab1-51e9-4cea-b050-79a6eb5021b3/storage_v2/_src_/database/postgres.edMnLQ/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/5832eab1-51e9-4cea-b050-79a6eb5021b3/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/dao/DaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/dao/DaoFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/dao/DepartmentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/dao/DepartmentDao.java" afterDir="false" />
-    </list>
+    <list default="true" id="80d45970-425b-4289-84d4-0d9016995ae0" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +9,6 @@
   </component>
   <component name="DatabaseLocalColorSettings">
     <colors>
-      <entry key="5832eab1-51e9-4cea-b050-79a6eb5021b3" value="" />
       <entry key="a86a3a1e-7818-4228-b5f1-ada1155041d4" value="" />
     </colors>
   </component>
